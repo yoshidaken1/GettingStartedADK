@@ -25,7 +25,8 @@ public class AdkLedOnOffProjActivity extends Activity {
     private static final String TAG = "Socym.AdkLedOnOffProj";
 
     // 本アプリを認識するためのインテントアクション名
-    private static final String ACTION_USB_PERMISSION = "jp.co.dorobook.AdkLedOnOffProj.action.USB_PERMISSION";
+    private static final String ACTION_USB_PERMISSION
+                = "jp.co.dorobook.AdkLedOnOffProj.action.USB_PERMISSION";
 
     private PendingIntent mPermissionIntent;
     private boolean mPermissionRequestPending;
@@ -172,7 +173,7 @@ public class AdkLedOnOffProjActivity extends Activity {
         }
     }
 
-    //USBアクセサリ終了処理
+    // USBアクセサリ終了処理
     private void closeAccessory() {
 
         try {
