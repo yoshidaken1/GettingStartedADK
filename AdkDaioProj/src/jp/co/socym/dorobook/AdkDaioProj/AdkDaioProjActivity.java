@@ -32,7 +32,8 @@ public class AdkDaioProjActivity extends Activity implements Runnable {
     private static final String TAG = "Socym.AdkDaioProj";
 
     // 本アプリを認識するためのインテントアクション名
-    private static final String ACTION_USB_PERMISSION = "jp.co.dorobook.AdkDaioProj.action.USB_PERMISSION";
+    private static final String ACTION_USB_PERMISSION
+                = "jp.co.dorobook.AdkDaioProj.action.USB_PERMISSION";
 
     private PendingIntent mPermissionIntent;
     private boolean mPermissionRequestPending;
@@ -122,7 +123,7 @@ public class AdkDaioProjActivity extends Activity implements Runnable {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 // デジタル出力処理(4)
                 byte command = (byte)0x0;       // LEDオン・オフ出力指定コマンド
-// トグルボタンが押されたら0x1そうでなければ0x0
+                // トグルボタンが押されたら0x1そうでなければ0x0
                 byte value = (byte)(isChecked ? 0x1 : 0x0);
                 sendCommand(command, value);    // 送信処理へ
             }
