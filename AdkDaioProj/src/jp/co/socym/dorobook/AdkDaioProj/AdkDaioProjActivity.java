@@ -277,9 +277,9 @@ public class AdkDaioProjActivity extends Activity implements Runnable {
             while (i < ret) {
                 int len = ret - i;
                 switch (buffer[i]) {
-                    case 0x2: //タクトスイッチオン・オフ入力指定コマンド(8)
+                    case 0x2: //タクトスイッチ・オン／オフ入力指定コマンド(8)
                         if (len >= 3) {
-                            //メッセージを作成しwhat値にタクトスイッチオン・オフ入力指定コマンドを指定
+                            //メッセージを作成しwhat値にタクトスイッチ・オン／オフ入力指定コマンドを指定
                             Message m = Message.obtain(mHandler, 0x2);
                             m.obj = new String("SW=" + buffer[i + 1]);
                             mHandler.sendMessage(m);//ハンドラーに送信する
@@ -306,7 +306,7 @@ public class AdkDaioProjActivity extends Activity implements Runnable {
         public void handleMessage(Message msg) {
             //what値のコマンドによってUI処理を分岐させる
             switch (msg.what) {
-                case 0x2: //タクトスイッチオン・オフ入力の表示(10)
+                case 0x2: //タクトスイッチ・オン／オフ入力の表示(10)
                     String s = (String) msg.obj;
                     if (s.equals("SW=1")) {
                         mTextView1.setText("ON");
