@@ -24,7 +24,8 @@ public class AdkLedPwmProjActivity extends Activity {
     private static final String TAG = "Socym.AdkLedPwmProj";
 
     // 本アプリを認識するためのインテントアクション名
-    private static final String ACTION_USB_PERMISSION = "jp.co.dorobook.AdkLedPwmProj.action.USB_PERMISSION";
+    private static final String ACTION_USB_PERMISSION
+                = "jp.co.dorobook.AdkLedPwmProj.action.USB_PERMISSION";
 
     private PendingIntent mPermissionIntent;
     private boolean mPermissionRequestPending;
@@ -36,21 +37,21 @@ public class AdkLedPwmProjActivity extends Activity {
 
     FileOutputStream mOutputStream;// 出力用ストリーム
 
-    //レイアウトされたシークバー用インスタンス(1)
+    // レイアウトされたシークバー用インスタンス(1)
     private SeekBar mSeekBar1;
 
-    //USB接続状態を監視するブロードキャストレシーバ mUsbReceiver
+    // USB接続状態を監視するブロードキャストレシーバ mUsbReceiver
     private final BroadcastReceiver mUsbReceiver = new BroadcastReceiver() {
 
         @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
-          //ACTION_USB_PERMISSIONの場合
+            // ACTION_USB_PERMISSIONの場合
             if (ACTION_USB_PERMISSION.equals(action)) {
                 synchronized (this) {
                     // Intent からアクセサリを取得
                     UsbAccessory accessory = UsbManager.getAccessory(intent);
-                    //接続許可ダイアログで OK=true, Cancel=false のどちらを押したか
+                    // 接続許可ダイアログで OK=true, Cancel=false のどちらを押したか
                     if (intent.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED, false)) {
                         // 接続を開く
                         openAccessory(accessory);
@@ -59,7 +60,7 @@ public class AdkLedPwmProjActivity extends Activity {
                     }
                     mPermissionRequestPending = false;
                 }
-            //USBホストシールドがUSBコネクタから外された場合
+            // USBホストシールドがUSBコネクタから外された場合
             } else if (UsbManager.ACTION_USB_ACCESSORY_DETACHED.equals(action)) {
                 // Intent からアクセサリを取得
                 UsbAccessory accessory = UsbManager.getAccessory(intent);
@@ -73,7 +74,7 @@ public class AdkLedPwmProjActivity extends Activity {
 
     };
 
-    //アプリ起動時の処理 OnCreate()メソッド（Activityライフサイクル）
+    // アプリ起動時の処理 OnCreate()メソッド（Activityライフサイクル）
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,9 +87,9 @@ public class AdkLedPwmProjActivity extends Activity {
 
         // ブロードキャストレシーバで受信するインテントを登録
         IntentFilter filter = new IntentFilter();
-        //USBアクセサリが接続／切断されたときのインテント・フィルター
+        // USBアクセサリが接続／切断されたときのインテント・フィルター
         filter.addAction(ACTION_USB_PERMISSION);
-        //USBアクセサリが切断された（取り外された）ときのインテント・フィルター
+        // USBアクセサリが切断された（取り外された）ときのインテント・フィルター
         filter.addAction(UsbManager.ACTION_USB_ACCESSORY_DETACHED);
         registerReceiver(mUsbReceiver, filter);
 
@@ -98,7 +99,7 @@ public class AdkLedPwmProjActivity extends Activity {
         mSeekBar1 = (SeekBar) findViewById(R.id.seekBar1);
         mSeekBar1.setMax(255);// シークバーの最大値を255にする
 
-        //シークバーを動かしたときの処理(3)
+        // シークバーを動かしたときの処理(3)
         mSeekBar1.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
 
             @Override
@@ -149,14 +150,14 @@ public class AdkLedPwmProjActivity extends Activity {
         }
     }
 
-    //他のActivityが開始される時の処理 OnPause()メソッド（Activityライフサイクル）
+    // 他のActivityが開始される時の処理 OnPause()メソッド（Activityライフサイクル）
     @Override
     public void onPause() {
         super.onPause();
         closeAccessory();
     }
 
-    //アプリ終了時の処理 OnDestroy()メソッド（Activityライフサイクル）
+    // アプリ終了時の処理 OnDestroy()メソッド（Activityライフサイクル）
     @Override
     public void onDestroy() {
         unregisterReceiver(mUsbReceiver);
@@ -182,7 +183,7 @@ public class AdkLedPwmProjActivity extends Activity {
         }
     }
 
-    //USBアクセサリ終了処理
+    // USBアクセサリ終了処理
     private void closeAccessory() {
 
         try {
