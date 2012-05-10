@@ -195,10 +195,12 @@ public class AdkLedOnOffProjActivity extends Activity {
         buffer[0] = value;
         if (mOutputStream != null) {
             try {
+
                 //出力ストリームにbuffer[]配列データを書き込む(7)
                 mOutputStream.write(buffer);
+
             } catch (IOException e) {
-                Log.e(TAG, "write failed", e);
+                Log.e(TAG, "sendCommand:write failed", e);
             }
         }
     }
